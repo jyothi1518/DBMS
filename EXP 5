@@ -1,0 +1,110 @@
+mysql> create table bus(
+    -> ticketno int(9) primary key,
+    -> journeydate date,
+    -> age int(4),
+    -> sex varchar(10),
+    -> source varchar(10),
+    -> destination varchar(10),
+    -> deptime varchar(10),
+    -> busno int(10));
+Query OK, 0 rows affected, 3 warnings (0.02 sec)
+
+mysql> desc bus;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| ticketno    | int         | NO   | PRI | NULL    |       |
+| journeydate | date        | YES  |     | NULL    |       |
+| age         | int         | YES  |     | NULL    |       |
+| sex         | varchar(10) | YES  |     | NULL    |       |
+| source      | varchar(10) | YES  |     | NULL    |       |
+| destination | varchar(10) | YES  |     | NULL    |       |
+| deptime     | varchar(10) | YES  |     | NULL    |       |
+| busno       | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into bus(ticketno,journeydate,age,sex,source,destination,deptime,busno)
+    -> values(1,'2022-11-23',21,'male','london','italy',5,98),(2,'2021-12-24',15,'female','london','india',15,97),(3,'2023-06-09',23,'male','paris','usa',11,96),(4,'2021-11-05',35,'female','india','italy',6,95),(5,'2020-03-26',45,'male','italy','germany',12,90),
+    -> (6,'2022-12-11',56,'female','india','sarjah',6,92);
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from bus;
++----------+-------------+------+--------+--------+-------------+---------+-------+
+| ticketno | journeydate | age  | sex    | source | destination | deptime | busno |
++----------+-------------+------+--------+--------+-------------+---------+-------+
+|        1 | 2022-11-23  |   21 | male   | london | italy       | 5       |    98 |
+|        2 | 2021-12-24  |   15 | female | london | india       | 15      |    97 |
+|        3 | 2023-06-09  |   23 | male   | paris  | usa         | 11      |    96 |
+|        4 | 2021-11-05  |   35 | female | india  | italy       | 6       |    95 |
+|        5 | 2020-03-26  |   45 | male   | italy  | germany     | 12      |    90 |
+|        6 | 2022-12-11  |   56 | female | india  | sarjah      | 6       |    92 |
++----------+-------------+------+--------+--------+-------------+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select distinct ticketno from bus;
++----------+
+| ticketno |
++----------+
+|        1 |
+|        2 |
+|        3 |
+|        4 |
+|        5 |
+|        6 |
++----------+
+6 rows in set (0.00 sec)
+
+mysql> select ticketno,journeydate,age,sex,source,destination,deptime,busno from bus
+    -> where sex='male';
++----------+-------------+------+------+--------+-------------+---------+-------+
+| ticketno | journeydate | age  | sex  | source | destination | deptime | busno |
++----------+-------------+------+------+--------+-------------+---------+-------+
+|        1 | 2022-11-23  |   21 | male | london | italy       | 5       |    98 |
+|        3 | 2023-06-09  |   23 | male | paris  | usa         | 11      |    96 |
+|        5 | 2020-03-26  |   45 | male | italy  | germany     | 12      |    90 |
++----------+-------------+------+------+--------+-------------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select ticketno,journeydate,age,sex,source,destination,deptime,busno from bus
+    -> where age>20 and age<40;
++----------+-------------+------+--------+--------+-------------+---------+-------+
+| ticketno | journeydate | age  | sex    | source | destination | deptime | busno |
++----------+-------------+------+--------+--------+-------------+---------+-------+
+|        1 | 2022-11-23  |   21 | male   | london | italy       | 5       |    98 |
+|        3 | 2023-06-09  |   23 | male   | paris  | usa         | 11      |    96 |
+|        4 | 2021-11-05  |   35 | female | india  | italy       | 6       |    95 |
++----------+-------------+------+--------+--------+-------------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select ticketno,journeydate,age,sex,source,destination,deptime,busno from bus
+    -> where source='london' or source='paris';
++----------+-------------+------+--------+--------+-------------+---------+-------+
+| ticketno | journeydate | age  | sex    | source | destination | deptime | busno |
++----------+-------------+------+--------+--------+-------------+---------+-------+
+|        1 | 2022-11-23  |   21 | male   | london | italy       | 5       |    98 |
+|        2 | 2021-12-24  |   15 | female | london | india       | 15      |    97 |
+|        3 | 2023-06-09  |   23 | male   | paris  | usa         | 11      |    96 |
++----------+-------------+------+--------+--------+-------------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select source,destination from bus
+    -> where deptime>10;
++--------+-------------+
+| source | destination |
++--------+-------------+
+| london | india       |
+| paris  | usa         |
+| italy  | germany     |
++--------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select ticketno from bus
+    -> where destination='sarjah';
++----------+
+| ticketno |
++----------+
+|        6 |
++----------+
+1 row in set (0.00 sec)
