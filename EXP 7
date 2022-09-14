@@ -1,0 +1,68 @@
+mysql> create table emp(
+    -> empno int,
+    -> ename varchar(10),
+    -> deptno int,
+    -> salary int);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into emp(empno,ename,deptno,salary)
+    -> values(1,'swathi',101,1000),(2,'navya',102,2000),(3,'sushma',103,3000),(4,'manasa',104,4000),(5,'sai',105,5000);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp;
++-------+--------+--------+--------+
+| empno | ename  | deptno | salary |
++-------+--------+--------+--------+
+|     1 | swathi |    101 |   1000 |
+|     2 | navya  |    102 |   2000 |
+|     3 | sushma |    103 |   3000 |
+|     4 | manasa |    104 |   4000 |
+|     5 | sai    |    105 |   5000 |
++-------+--------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select avg(salary)
+    -> from emp;
++-------------+
+| avg(salary) |
++-------------+
+|   3000.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary)
+    -> from emp;
++-------------+
+| min(salary) |
++-------------+
+|        1000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary)
+    -> from emp;
++-------------+
+| max(salary) |
++-------------+
+|        5000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(salary)
+    -> from emp;
++-------------+
+| sum(salary) |
++-------------+
+|       15000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*)
+    -> from emp;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
