@@ -1,0 +1,51 @@
+mysql> create table emp(
+    -> empno int(4),
+    -> ename varchar(10),
+    -> deptno int(3));
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> desc emp;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| empno  | int         | YES  |     | NULL    |       |
+| ename  | varchar(10) | YES  |     | NULL    |       |
+| deptno | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> add sal int;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| empno  | int         | YES  |     | NULL    |       |
+| ename  | varchar(10) | YES  |     | NULL    |       |
+| deptno | int         | YES  |     | NULL    |       |
+| sal    | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> drop column sal;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| empno  | int         | YES  |     | NULL    |       |
+| ename  | varchar(10) | YES  |     | NULL    |       |
+| deptno | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> truncate table emp;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> drop table emp;
+Query OK, 0 rows affected (0.01 sec)
