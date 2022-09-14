@@ -1,0 +1,152 @@
+mysql> create database dept;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> use dept;
+Database changed
+mysql> create table dept(
+    -> deptno int,
+    -> deptname varchar(10),
+    -> deptloc varchar(20));
+Query OK, 0 rows affected (0.04 sec)
+mysql> insert into dept values(1,"cse","sse");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc dept;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| deptno   | int         | YES  |     | NULL    |       |
+| deptname | varchar(10) | YES  |     | NULL    |       |
+| deptloc  | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> select * from dept;
++--------+----------+---------+
+| deptno | deptname | deptloc |
++--------+----------+---------+
+|      1 | cse      | sse     |
++--------+----------+---------+
+1 row in set (0.00 sec)
+
+mysql> use dept;
+Database changed
+mysql> create table emp(
+    -> empno int,
+    -> ename varchar(20),
+    -> job varchar(10),
+    -> deptno int,
+    -> sal int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into emp (empno,ename,job,deptno,sal)
+    -> values (1,"swathi","ips",15,15000),(2,"jyothi","sp",29,12000);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp;
++-------+--------+------+--------+-------+
+| empno | ename  | job  | deptno | sal   |
++-------+--------+------+--------+-------+
+|     1 | swathi | ips  |     15 | 15000 |
+|     2 | jyothi | sp   |     29 | 12000 |
++-------+--------+------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> update emp
+    -> set sal=15000
+    -> where job="ips";
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from emp;
++-------+--------+------+--------+-------+
+| empno | ename  | job  | deptno | sal   |
++-------+--------+------+--------+-------+
+|     1 | swathi | ips  |     15 | 15000 |
+|     2 | jyothi | sp   |     29 | 12000 |
++-------+--------+------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select empno,ename,job,deptno,sal from emp;
++-------+--------+------+--------+-------+
+| empno | ename  | job  | deptno | sal   |
++-------+--------+------+--------+-------+
+|     1 | swathi | ips  |     15 | 15000 |
+|     2 | jyothi | sp   |     29 | 12000 |
++-------+--------+------+--------+-------+
+2 rows in set (0.00 sec)
+mysql> create table employee(
+    -> empno int,
+    -> ename varchar(10),
+    -> job varchar(10),
+    -> deptno int,
+    -> sal int);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into employee
+    -> select * from emp
+    -> where sal=15000;
+Query OK, 1 row affected (0.01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> select*from emp;
++-------+--------+------+--------+-------+
+| empno | ename  | job  | deptno | sal   |
++-------+--------+------+--------+-------+
+|     1 | swathi | ips  |     15 | 15000 |
+|     2 | jyothi | sp   |     29 | 12000 |
++-------+--------+------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into employee
+    -> select * from emp
+    -> where sal=1;
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++-------+--------+------+--------+-------+
+| empno | ename  | job  | deptno | sal   |
++-------+--------+------+--------+-------+
+|     1 | swathi | ips  |     15 | 15000 |
++-------+--------+------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select ename,job from emp;
++--------+------+
+| ename  | job  |
++--------+------+
+| swathi | ips  |
+| jyothi | sp   |
++--------+------+
+2 rows in set (0.00 sec)
+
+mysql> delete from emp
+    -> where job='sp';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp;
++-------+--------+------+--------+-------+
+| empno | ename  | job  | deptno | sal   |
++-------+--------+------+--------+-------+
+|     1 | swathi | ips  |     15 | 15000 |
++-------+--------+------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp
+    -> where deptno=29;
+Empty set (0.00 sec)
+
+mysql> select * from emp
+    -> where deptno=30;
+Empty set (0.00 sec)
+
+mysql> select
+    -> distinct deptno from emp;
++--------+
+| deptno |
++--------+
+|     15 |
++--------+
+1 row in set (0.00 sec)
