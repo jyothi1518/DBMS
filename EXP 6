@@ -1,0 +1,97 @@
+mysql> create table emp(
+    -> empno int,
+    -> ename varchar(20),
+    -> sal int);
+Query OK, 0 rows affected (0.01 sec)
+mysql> insert into emp(empno,ename,sal)
+    -> values(1,'swathi',4000),(2,'navya',2000),(3,'sushma',1000),(4,'manasa',5000),(5,'sai',3000);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+mysql> select * from emp;
++-------+--------+------+
+| empno | ename  | sal  |
++-------+--------+------+
+|     1 | swathi | 4000 |
+|     2 | navya  | 2000 |
+|     3 | sushma | 1000 |
+|     4 | manasa | 5000 |
+|     5 | sai    | 3000 |
++-------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emp
+    ->
+    -> order by emp.sal asc;
++-------+--------+------+
+| empno | ename  | sal  |
++-------+--------+------+
+|     3 | sushma | 1000 |
+|     2 | navya  | 2000 |
+|     5 | sai    | 3000 |
+|     1 | swathi | 4000 |
+|     4 | manasa | 5000 |
++-------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emp
+    -> order by emp.sal desc;
++-------+--------+------+
+| empno | ename  | sal  |
++-------+--------+------+
+|     4 | manasa | 5000 |
+|     1 | swathi | 4000 |
+|     5 | sai    | 3000 |
+|     2 | navya  | 2000 |
+|     3 | sushma | 1000 |
++-------+--------+------+
+5 rows in set (0.00 sec)
+mysql> create table customers(
+    -> customerid int,
+    -> customername varchar(20),
+    -> contactname varchar(10),
+    -> address varchar(10),
+    -> city varchar(10),
+    -> postalcode int,
+    -> country varchar(10));
+Query OK, 0 rows affected (0.02 sec)
+mysql> insert into customers(customerid,customername,contactname,address,city,postalcode,country)
+    -> values(1,'swathi','potti','aa','kadapa',516172,'india'),(2,'navya','jyothi','bb','losangeles',516789,'australia'),(3,'sushma','sweety','cc','prakasam',567432,'india'),(4,'manasa','sai','dd','mexico',678543,'japan'),(5,'vara','prashanthi','ee','gujarat',098765,'india'),(6,'hari','prasanna','ff','xiano',987654,'japan'),(7,'rakesh','reddy','gg','goa',678543,'india'),(8,'sowmya','sharma','hh','chennai',675894,'india'),(9,'ramu','rama','yy','kerla',676764,'india');
+Query OK, 9 rows affected (0.01 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+mysql> select * from customers;
++------------+--------------+-------------+---------+------------+------------+-----------+
+| customerid | customername | contactname | address | city       | postalcode | country   |
++------------+--------------+-------------+---------+------------+------------+-----------+
+|          1 | swathi       | potti       | aa      | kadapa     |     516172 | india     |
+|          2 | navya        | jyothi      | bb      | losangeles |     516789 | australia |
+|          3 | sushma       | sweety      | cc      | prakasam   |     567432 | india     |
+|          4 | manasa       | sai         | dd      | mexico     |     678543 | japan     |
+|          5 | vara         | prashanthi  | ee      | gujarat    |      98765 | india     |
+|          6 | hari         | prasanna    | ff      | xiano      |     987654 | japan     |
+|          7 | rakesh       | reddy       | gg      | goa        |     678543 | india     |
+|          8 | sowmya       | sharma      | hh      | chennai    |     675894 | india     |
+|          9 | ramu         | rama        | yy      | kerla      |     676764 | india     |
++------------+--------------+-------------+---------+------------+------------+-----------+
+9 rows in set (0.00 sec)
+mysql> select country,count(*)
+    -> from customers
+    -> group by country
+    -> order by country asc;
++-----------+----------+
+| country   | count(*) |
++-----------+----------+
+| australia |        1 |
+| india     |        6 |
+| japan     |        2 |
++-----------+----------+
+3 rows in set (0.00 sec)
+mysql> select count(country),country
+    -> from customers
+    -> group by country
+    -> having count(country)>5;
++----------------+---------+
+| count(country) | country |
++----------------+---------+
+|              6 | india   |
++----------------+---------+
+1 row in set (0.00 sec)
