@@ -1,0 +1,166 @@
+mysql> create table emp(
+    -> empno int(6),
+    -> ename varchar(20) not null,
+    -> job varchar(10) not null,
+    -> deptno int(3),
+    -> sal int(5));
+Query OK, 0 rows affected, 3 warnings (0.01 sec)
+
+mysql> desc emp;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| empno  | int         | YES  |     | NULL    |       |
+| ename  | varchar(20) | NO   |     | NULL    |       |
+| job    | varchar(10) | NO   |     | NULL    |       |
+| deptno | int         | YES  |     | NULL    |       |
+| sal    | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> add experience int;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| empno      | int         | YES  |     | NULL    |       |
+| ename      | varchar(20) | NO   |     | NULL    |       |
+| job        | varchar(10) | NO   |     | NULL    |       |
+| deptno     | int         | YES  |     | NULL    |       |
+| sal        | int         | YES  |     | NULL    |       |
+| experience | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> create table dept(
+    -> deptno int(2),
+    -> dname varchar(10),
+    -> loc varchar(10),
+    -> primary key(deptno));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> desc dept;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| deptno | int         | NO   | PRI | NULL    |       |
+| dname  | varchar(10) | YES  |     | NULL    |       |
+| loc    | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> use emp;
+Database changed
+mysql> create table empl(
+    -> ename varchar(10),
+    -> empno int,
+    -> check(empno>100));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc empl;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ename | varchar(10) | YES  |     | NULL    |       |
+| empno | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> drop table emp;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table emp(
+    -> empno int(5),
+    -> ename varchar(15),
+    -> job varchar(10),
+    -> deptno int(3),
+    -> unique (job),
+    -> foreign key(deptno)
+    -> references dept(deptno));
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> desc emp;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| empno  | int         | YES  |     | NULL    |       |
+| ename  | varchar(15) | YES  |     | NULL    |       |
+| job    | varchar(10) | YES  | UNI | NULL    |       |
+| deptno | int         | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> use emp;
+Database changed
+mysql> create table student(
+    -> regno int(6),
+    -> mark int(3),
+    -> check (mark>=0 and mark<=100));
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> desc student;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| regno | int  | YES  |     | NULL    |       |
+| mark  | int  | YES  |     | NULL    |       |
++-------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+mysql> create table cust(
+    -> custid int(6) not null,
+    -> name varchar(10));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> alter table cust
+    -> modify column name varchar(10) not null;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc cust;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| custid | int         | NO   |     | NULL    |       |
+| name   | varchar(10) | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> drop table cust;
+Query OK, 0 rows affected (0.01 sec)
+mysql> create table cust(
+    -> custid int(6) unique,
+    -> name varchar(10));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> alter table cust
+    -> add unique(custid);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc cust;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| custid | int         | YES  | UNI | NULL    |       |
+| name   | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> use emp;
+Database changed
+mysql> create table stud(
+    -> regno int(6) primary key,
+    -> name varchar(20));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> desc stud;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| regno | int         | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
